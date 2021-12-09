@@ -16,22 +16,23 @@ namespace minskatedev
                     static decimal speed = 0;
                     static decimal turning = 0;
                     static decimal vertVel = 0;
-                    static decimal powerSlideAngle = 0;
-                    static decimal powerSlideAngleTotal = 0;
 
                     static bool keepVertMomentum = false;
                     static bool jumped = false;
                     static bool isColliding = false;
                     static bool isCollidingGround = true;
 
-                    public static void ExecJump()
+                    public static bool ExecJump()
                     {
                         if (!jumped)
                         {
                             vertVel = 0.2M;
                             jumped = true;
                             keepVertMomentum = true;
+                            return true;
                         }
+
+                        return false;
                     }
 
                     public static void ExecAddSpeed()
@@ -55,22 +56,7 @@ namespace minskatedev
                     public static decimal ExecBrake()
                     {
                         if (speed > 0)
-                        {
                             speed -= 0.005M;
-                            //if (powerSlideAngleTotal > -(decimal)Math.PI / 2)
-                            //{
-                            //    powerSlideAngle = -(decimal)Math.PI / 10;
-                            //    powerSlideAngleTotal -= (decimal)Math.PI / 10;
-                            //}
-                            //else
-                            //{
-                            //    powerSlideAngle = 0;
-                            //}
-                        }
-                        else
-                        {
-                            powerSlideAngle = 0;
-                        }
 
                         return speed;
                     }
@@ -187,7 +173,7 @@ namespace minskatedev
                         if (Math.Abs(speed) < 0.005M)
                             speed = 0;
 
-                        return new decimal[] { speed, vertVel, turning, powerSlideAngle };
+                        return new decimal[] { speed, vertVel, turning, jumped ? 1 : 0 };
                     }
                 }
             }

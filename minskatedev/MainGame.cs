@@ -93,7 +93,6 @@ namespace minskatedev
             viewMatrix = this.sk8.Move(ref camTarget, ref camPosition, (float)sk8Vals[0]);
             viewMatrix = this.sk8.VertMove(ref camTarget, ref camPosition, (float)sk8Vals[1]);
             viewMatrix = this.sk8.Turn(ref camTarget, ref camPosition, (float)sk8Vals[2]);
-            this.sk8.Rotate(0, (float)sk8Vals[3], 0);
 
             if (this.sk8.deck.worldMatrix.M42 < -5f)
                 ResetSk8();

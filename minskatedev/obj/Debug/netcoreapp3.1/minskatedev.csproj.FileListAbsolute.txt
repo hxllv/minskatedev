@@ -1,0 +1,92 @@
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.exe
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.deps.json
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.runtimeconfig.json
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.runtimeconfig.dev.json
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\minskatedev.pdb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\osx\native\libopenal.1.dylib
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\SDL2.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\soft_oal.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\SDL2.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\soft_oal.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.AssemblyInfoInputs.cache
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.AssemblyInfo.cs
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.csproj.CoreCompileInputs.cache
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.dll
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.pdb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.genruntimeconfig.cache
+C:\Users\nacet\source\repos\minskatedev\minskatedev\obj\Debug\netcoreapp3.1\minskatedev.csproj.AssemblyReference.cache
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\black.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\boximg.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\kickerimg.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\navy blue.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\purpleish.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\railimg.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\shake.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\sk8.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\turq.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\white.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\menu\select.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\menu\view.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\menu\x.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\obst\box.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\obst\kicker.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\obst\rail.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\deck.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\deck.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\trucks.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\wheels.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\black.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\navyblue.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\purpleish.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\turq.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\trucks_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks\black.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks\navyblue.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks\purpleish.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks\turq.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\trucks\white.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\deck_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\shake_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\sk8_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\decks\shake.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\decks\sk8.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\obst\floor.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\box\box_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\box\box_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\kicker\kicker_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\kicker\kicker_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\rail\rail_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\rail\rail_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\black_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\black_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\navy blue_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\navy blue_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\purpleish_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\purpleish_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\turq_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\turq_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\white_0.mgcontent
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\Desktop\sola\rg\rgpn\obj\trucks+wheels textures\white_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\black_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\defsk8\wheels_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\navy blue_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\purpleish_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\turq_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\imgs\white_0.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheell.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheelr.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\blackl.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\blackr.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\navybluel.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\navybluer.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\purpleishl.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\purpleishr.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\turql.xnb
+C:\Users\nacet\source\repos\minskatedev\minskatedev\bin\Debug\netcoreapp3.1\Content\models\sk8\wheels\turqr.xnb

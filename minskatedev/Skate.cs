@@ -142,19 +142,21 @@ namespace minskatedev
                 Matrix trucksFMatrix = this.trucksF.worldMatrix;
                 Matrix trucksBMatrix = this.trucksB.worldMatrix;
 
+                Quaternion test = Quaternion.CreateFromAxisAngle(Vector3.UnitY, angle);
                 Matrix lft = Matrix.CreateFromYawPitchRoll(angle, 0f, 0f);
                 Matrix ident = Matrix.Identity;
                 
                 this.angle += angle;
-                this.deck.worldMatrix = ident * lft * deckMatrix;
+                //this.deck.worldMatrix = ident * lft * deckMatrix;
+                this.deck.worldMatrix = ident * Matrix.CreateFromQuaternion(test) * deckMatrix;
 
-                this.wheelFL.worldMatrix = identWFL * lft * identWFLU * wheelsFLMatrix;
-                this.wheelFR.worldMatrix = identWFR * lft * identWFRU * wheelsFRMatrix;
-                this.wheelBL.worldMatrix = identWBL * lft * identWBLU * wheelsBLMatrix;
-                this.wheelBR.worldMatrix = identWBR * lft * identWBRU * wheelsBRMatrix;
+                //this.wheelFL.worldMatrix = identWFL * lft * identWFLU * wheelsFLMatrix;
+                //this.wheelFR.worldMatrix = identWFR * lft * identWFRU * wheelsFRMatrix;
+                //this.wheelBL.worldMatrix = identWBL * lft * identWBLU * wheelsBLMatrix;
+                //this.wheelBR.worldMatrix = identWBR * lft * identWBRU * wheelsBRMatrix;
 
-                this.trucksF.worldMatrix = identTF * lft * identTB * trucksFMatrix;
-                this.trucksB.worldMatrix = identTB * lft * identTF * trucksBMatrix;
+                //this.trucksF.worldMatrix = identTF * lft * identTB * trucksFMatrix;
+                //this.trucksB.worldMatrix = identTB * lft * identTF * trucksBMatrix;
 
                 this.deckBounds = UpdateBoundingBox(this.deck.model, this.deck.worldMatrix);
                 this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.worldMatrix);

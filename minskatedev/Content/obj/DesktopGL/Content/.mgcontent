@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/black.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/boximg.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/defsk8/deck.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/defsk8/trucks.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/defsk8/wheels.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/kickerimg.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/menu/select.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/menu/view.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/menu/x.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/navy blue.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/purpleish.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/railimg.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/shake.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/sk8.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/turq.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/imgs/white.png</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/obst/box.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/obst/floor.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/obst/kicker.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/obst/rail.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/deck.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/decks/shake.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/decks/sk8.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks/black.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks/navyblue.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks/purpleish.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks/turq.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/trucks/white.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheell.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheelr.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/blackl.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/blackr.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/navybluel.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/navybluer.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/purpleishl.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/purpleishr.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/turql.fbx</File>
+    <File>C:/Users/nacet/source/repos/minskatedev/minskatedev/Content/models/sk8/wheels/turqr.fbx</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
