@@ -12,10 +12,10 @@ namespace minskatedev
             public ModelHelper floor;
             public BoundingBox bounds;
 
-            public Floor(Microsoft.Xna.Framework.Game game, Matrix worldMatrix, Matrix translation)
+            public Floor(Microsoft.Xna.Framework.Game game, Matrix translation, Matrix rotationX, Matrix rotationY, Matrix rotationZ)
             {
-                this.floor = new ModelHelper(game, worldMatrix, "models\\obst\\floor", translation);
-                this.bounds = UpdateBoundingBox(this.floor.model, this.floor.worldMatrix);
+                this.floor = new ModelHelper(game, "models\\obst\\floor", translation, rotationX, rotationY, rotationZ);
+                this.bounds = UpdateBoundingBox(this.floor.model, this.floor.translation);
             }
             public void FloorDraw(Matrix viewMatrix, Matrix projectionMatrix)
             {
@@ -26,7 +26,7 @@ namespace minskatedev
                     {
                         effect.EnableDefaultLighting();
                         effect.View = viewMatrix;
-                        effect.World = floor.worldMatrix;
+                        effect.World = floor.rotationX * floor.rotationY * floor.rotationZ * floor.translation;
                         effect.Projection = projectionMatrix;
                     }
 

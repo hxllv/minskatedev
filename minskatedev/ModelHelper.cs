@@ -8,12 +8,22 @@ namespace minskatedev
     public class ModelHelper
     {
         public Model model;
-        public Matrix worldMatrix;
+        public Matrix translation;
+        public Matrix rotationX;
+        public Matrix rotationY;
+        public Matrix rotationZ;
 
-        public ModelHelper(Microsoft.Xna.Framework.Game game, Matrix worldMatrix, string modelName, Matrix translation)
+        public ModelHelper(Microsoft.Xna.Framework.Game game, string modelName, 
+            Matrix translation, 
+            Matrix rotationX,
+            Matrix rotationY,
+            Matrix rotationZ)
         {
             this.model = game.Content.Load<Model>(modelName);
-            this.worldMatrix = worldMatrix * translation;
+            this.translation = translation;
+            this.rotationX = rotationX;
+            this.rotationY = rotationY;
+            this.rotationZ = rotationZ;
         }
     }
 }

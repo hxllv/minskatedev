@@ -13,10 +13,10 @@ namespace minskatedev
             public BoundingBox bounds;
             public BoundingBox top;
 
-            public Rail(Microsoft.Xna.Framework.Game game, Matrix worldMatrix, Matrix translation)
+            public Rail(Microsoft.Xna.Framework.Game game, Matrix translation, Matrix rotationX, Matrix rotationY, Matrix rotationZ)
             {
-                this.rail = new ModelHelper(game, worldMatrix, "models\\obst\\rail", translation);
-                this.bounds = UpdateBoundingBox(this.rail.model, this.rail.worldMatrix);
+                this.rail = new ModelHelper(game, "models\\obst\\rail", translation, rotationX, rotationY, rotationZ);
+                this.bounds = UpdateBoundingBox(this.rail.model, this.rail.translation);
                 Vector3 max = this.bounds.Max;
                 Vector3 min = this.bounds.Min;
                 float y = Math.Max(max.Y, min.Y);
@@ -33,7 +33,7 @@ namespace minskatedev
                     {
                         effect.EnableDefaultLighting();
                         effect.View = viewMatrix;
-                        effect.World = rail.worldMatrix;
+                        effect.World = rail.rotationX * rail.rotationY * rail.rotationZ * rail.translation;
                         effect.Projection = projectionMatrix;
                     }
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace minskatedev
 {
@@ -46,29 +47,19 @@ namespace minskatedev
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, 1f, 1000f);
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, new Vector3(0, 1f, 0f));
             worldMatrix = Matrix.CreateWorld(new Vector3(0f, 0f, 0f), Vector3.Forward, Vector3.Up);
-            this.sk8 = new Skate(sk8);
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(0f, 0f, 0f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(0f, 0f, 12.5f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(0f, 0f, -12.5f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(12.5f, 0f, 0f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(12.5f, 0f, 12.5f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(12.5f, 0f, -12.5f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(-12.5f, 0f, 0f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(-12.5f, 0f, 12.5f)));
-            this.floor.Add(new Floor(this.game, this.worldMatrix, Matrix.CreateTranslation(-12.5f, 0f, -12.5f)));
+            this.sk8 = new Skate(sk8, this);
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(0f, 0f, 12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(0f, 0f, -12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(12.5f, 0f, 0f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(12.5f, 0f, 12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(12.5f, 0f, -12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(-12.5f, 0f, 0f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(-12.5f, 0f, 12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
+            this.floor.Add(new Floor(this.game, Matrix.CreateTranslation(-12.5f, 0f, -12.5f), Matrix.Identity, Matrix.Identity, Matrix.Identity));
 
             EditWorld.InitEditWorld(this.game, worldMatrix);
             System.Diagnostics.Debug.WriteLine(floor[0]);
-        }
-        public void ResetSk8()
-        {
-            this.sk8.wheelFL.worldMatrix = Matrix.Identity * Matrix.CreateTranslation(0f, 1f, 0f);
-            this.sk8.deck.worldMatrix = Matrix.Identity * Matrix.CreateTranslation(0f, 1f, 0f);
-            this.sk8.trucksF.worldMatrix = Matrix.Identity * Matrix.CreateTranslation(0f, 1f, 0f);
-            this.sk8.angle = 0;
-            camTarget = new Vector3(0f, 0.8f, 0f);
-            camPosition = new Vector3(-5f, 2.3f, 0f);
-            viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, new Vector3(0, 1f, 0f));
         }
 
         public void MainGameUpdate()
@@ -94,8 +85,8 @@ namespace minskatedev
             viewMatrix = this.sk8.VertMove(ref camTarget, ref camPosition, (float)sk8Vals[1]);
             viewMatrix = this.sk8.Turn(ref camTarget, ref camPosition, (float)sk8Vals[2]);
 
-            if (this.sk8.deck.worldMatrix.M42 < -5f)
-                ResetSk8();
+            if (this.sk8.deck.translation.M42 < -5f)
+                this.sk8.ResetSk8();
 
             if (this.editing)
                 EditWorld.UpdateEditWorld(this, game);

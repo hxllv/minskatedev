@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System;
 using System.Collections.Generic;
 
 namespace minskatedev
@@ -16,6 +15,8 @@ namespace minskatedev
                 public static List<Rail> rails;
                 public static List<Floor> floor;
                 private static decimal[] phys;
+                static int doingTrick = 0;
+                public static bool fuckedTrick = false;
 
                 public static decimal[] UpdateInput()
                 {
@@ -26,6 +27,23 @@ namespace minskatedev
                     {
                         if (Physics.ExecJump())
                             Animations.Ollie.KeyPress();
+
+                        if (doingTrick != 0)
+                        {
+                            switch (doingTrick)
+                            {
+                                case 1:
+                                    if (!Animations.Flip.StopTrick())
+                                        fuckedTrick = true;
+                                    break;
+                                case 2:
+                                    if (!Animations.Shuv.StopTrick())
+                                        fuckedTrick = true;
+                                    break;
+                            }
+
+                            doingTrick = 0;
+                        }
                     }
 
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
@@ -71,96 +89,31 @@ namespace minskatedev
                         Physics.ExecStraightenTurn();
                     }
 
+                    if (doingTrick == 0)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
+                        {
+                            Animations.Flip.KeyPress(0);
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
+                        {
+                            Animations.Flip.KeyPress(1);
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+                        {
+                            Animations.Shuv.KeyPress(0);
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
+                        {
+                            Animations.Shuv.KeyPress(1);
+                        }
+                    }
+
                     Animations.Ollie.Animate();
+                    Animations.Flip.Animate();
+                    Animations.Shuv.Animate();
 
                     return phys;
-                }
-
-                public static class Animations
-                {
-
-                    public static Skate sk8;
-
-                    public static class Powerslide
-                    {
-                        static decimal powerSlideAngle = 0;
-                        static decimal powerSlideAngleTotal = 0;
-
-                        public static void KeyDown(decimal speed)
-                        {
-                            if (speed > 0)
-                            {
-                                if (powerSlideAngleTotal > -(decimal)Math.PI / 2)
-                                {
-                                    powerSlideAngle = -(decimal)Math.PI / 10;
-                                    powerSlideAngleTotal -= (decimal)Math.PI / 10;
-                                }
-                                else
-                                {
-                                    powerSlideAngle = 0;
-                                }
-                            }
-                            else
-                            {
-                                powerSlideAngle = 0;
-                            }
-                            sk8.Rotate(0, (float)powerSlideAngle, 0);
-                        }
-
-                        public static void KeyUp(decimal speed)
-                        {
-                            if (powerSlideAngleTotal < 0)
-                            {
-                                powerSlideAngle = (decimal)Math.PI / 10;
-                                powerSlideAngleTotal += (decimal)Math.PI / 10;
-                            }
-                            else if (powerSlideAngleTotal == 0)
-                            {
-                                powerSlideAngle = 0;
-                            }
-                            sk8.Rotate(0, (float)powerSlideAngle, 0);
-                        }
-                    }
-
-                    public static class Ollie
-                    {
-                        static bool doAnim = false;
-                        static bool popDone = false;
-                        static decimal olliePitch = 0;
-                        static decimal olliePitchTotal = 0;
-
-                        public static void KeyPress()
-                        {
-                            doAnim = true;
-                        }
-
-                        public static void Animate()
-                        {
-                            if (!doAnim) return;
-
-                            if (olliePitchTotal >= 0.6M)
-                                popDone = true;
-
-                            if (!popDone)
-                            {
-                                olliePitch = 0.12M;
-                                olliePitchTotal += 0.12M;
-                            }
-                            else
-                            {
-                                olliePitch = -0.05M;
-                                olliePitchTotal -= 0.05M;
-                            }
-
-                            if (olliePitchTotal == 0)
-                            {
-                                popDone = false;
-                                doAnim = false;
-                            }
-
-                            sk8.Rotate((float)olliePitch, 0, 0);
-                        }
-                    }
                 }
             }
         }

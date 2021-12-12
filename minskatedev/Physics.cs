@@ -18,7 +18,7 @@ namespace minskatedev
                     static decimal vertVel = 0;
 
                     static bool keepVertMomentum = false;
-                    static bool jumped = false;
+                    public static bool jumped = false;
                     static bool isColliding = false;
                     static bool isCollidingGround = true;
 
@@ -26,7 +26,7 @@ namespace minskatedev
                     {
                         if (!jumped)
                         {
-                            vertVel = 0.2M;
+                            vertVel = 0.25M;
                             jumped = true;
                             keepVertMomentum = true;
                             return true;
@@ -158,7 +158,24 @@ namespace minskatedev
                         }
 
                         if (isCollidingGround && !keepVertMomentum)
+                        {
                             vertVel = 0;
+                            if (fuckedTrick || doingTrick != 0)
+                            {
+                                fuckedTrick = false;
+                                switch (doingTrick)
+                                {
+                                    case 1:
+                                        Animations.Flip.doAnim = false;
+                                        break;
+                                    case 2:
+                                        Animations.Shuv.doAnim = false;
+                                        break;
+                                }
+                                doingTrick = 0;
+                                sk8.ResetSk8();
+                            }
+                        }
 
                         if (isColliding)
                         {

@@ -24,9 +24,9 @@ namespace minskatedev
 
             public static void InitEditWorld(Microsoft.Xna.Framework.Game game, Matrix worldMatrix)
             {
-                floorE = new ModelHelper(game, worldMatrix, "models\\obst\\floor", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)));
-                boxE = new ModelHelper(game, worldMatrix, "models\\obst\\box", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)));
-                railE = new ModelHelper(game, worldMatrix, "models\\obst\\rail", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)));
+                floorE = new ModelHelper(game, "models\\obst\\floor", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)), Matrix.Identity, Matrix.Identity, Matrix.Identity);
+                boxE = new ModelHelper(game, "models\\obst\\box", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)), Matrix.Identity, Matrix.Identity, Matrix.Identity);
+                railE = new ModelHelper(game, "models\\obst\\rail", Matrix.CreateTranslation(new Vector3(0f, 0f, 0f)), Matrix.Identity, Matrix.Identity, Matrix.Identity);
                 toDraw = floorE;
                 offset = 10f;
                 rotation = Matrix.Identity;
@@ -70,13 +70,13 @@ namespace minskatedev
                     switch (selectedItem)
                     {
                         case 0:
-                            mainGame.floor.Add(new Floor(game, toDraw.worldMatrix, Matrix.CreateTranslation(0f, 0f, 0f)));
+                            mainGame.floor.Add(new Floor(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
                             break;
                         case 1:
-                            mainGame.boxes.Add(new Box(game, toDraw.worldMatrix, Matrix.CreateTranslation(0f, 0f, 0f)));
+                            mainGame.boxes.Add(new Box(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
                             break;
                         case 2:
-                            mainGame.rails.Add(new Rail(game, toDraw.worldMatrix, Matrix.CreateTranslation(0f, 0f, 0f)));
+                            mainGame.rails.Add(new Rail(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
                             break;
                     }
 
@@ -93,23 +93,23 @@ namespace minskatedev
                     List<float> railDists = new List<float>();
                     List<float> floorDists = new List<float>();
 
-                    Vector3 toDrawVec = new Vector3(toDraw.worldMatrix.M41, toDraw.worldMatrix.M42, toDraw.worldMatrix.M43);
+                    Vector3 toDrawVec = new Vector3(toDraw.translation.M41, toDraw.translation.M42, toDraw.translation.M43);
 
                     foreach (Box box in mainGame.boxes)
                     {
-                        Vector3 boxVec = new Vector3(box.box.worldMatrix.M41, box.box.worldMatrix.M42, box.box.worldMatrix.M43);
+                        Vector3 boxVec = new Vector3(box.box.translation.M41, box.box.translation.M42, box.box.translation.M43);
                         float dist = Vector3.Distance(toDrawVec, boxVec);
                         boxDists.Add(dist);
                     }
                     foreach (Rail rail in mainGame.rails)
                     {
-                        Vector3 railVec = new Vector3(rail.rail.worldMatrix.M41, rail.rail.worldMatrix.M42, rail.rail.worldMatrix.M43);
+                        Vector3 railVec = new Vector3(rail.rail.translation.M41, rail.rail.translation.M42, rail.rail.translation.M43);
                         float dist = Vector3.Distance(toDrawVec, railVec);
                         railDists.Add(dist);
                     }
                     foreach (Floor floor in mainGame.floor)
                     {
-                        Vector3 floorVec = new Vector3(floor.floor.worldMatrix.M41, floor.floor.worldMatrix.M42, floor.floor.worldMatrix.M43);
+                        Vector3 floorVec = new Vector3(floor.floor.translation.M41, floor.floor.translation.M42, floor.floor.translation.M43);
                         float dist = Vector3.Distance(toDrawVec, floorVec);
                         floorDists.Add(dist);
                     }
@@ -160,18 +160,19 @@ namespace minskatedev
             {
                 float cos = (float)Math.Cos((double)sk8.angle) * offset;
                 float sin = -(float)Math.Sin((double)sk8.angle) * offset;
-                float x = sk8.deck.worldMatrix.M41;
-                float z = sk8.deck.worldMatrix.M43;
+                float x = sk8.deck.translation.M41;
+                float z = sk8.deck.translation.M43;
 
-                toDraw.worldMatrix = rotation * Matrix.CreateTranslation(x, 0f, z) * Matrix.CreateTranslation(cos, 0, sin);
+                toDraw.translation = Matrix.CreateTranslation(x, 0f, z) * Matrix.CreateTranslation(cos, 0, sin);
+                toDraw.rotationY = rotation;
 
                 if (selectedItem == 0)
                 {
-                    float tDX = toDraw.worldMatrix.M41;
-                    float tDZ = toDraw.worldMatrix.M43;
+                    float tDX = toDraw.translation.M41;
+                    float tDZ = toDraw.translation.M43;
 
-                    toDraw.worldMatrix.M41 = roundUp(tDX, 12.5f);
-                    toDraw.worldMatrix.M43 = roundUp(tDZ, 12.5f);
+                    toDraw.translation.M41 = roundUp(tDX, 12.5f);
+                    toDraw.translation.M43 = roundUp(tDZ, 12.5f);
                 }
 
                 //for every model
@@ -181,7 +182,7 @@ namespace minskatedev
                     {
                         effect.EnableDefaultLighting();
                         effect.View = viewMatrix;
-                        effect.World = toDraw.worldMatrix;
+                        effect.World = toDraw.rotationX * toDraw.rotationY * toDraw.rotationZ * toDraw.translation;
                         effect.Projection = projectionMatrix;
                     }
 

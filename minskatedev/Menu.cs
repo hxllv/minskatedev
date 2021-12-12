@@ -57,12 +57,14 @@ namespace minskatedev
             int x = 0;
             foreach (string i in new string[] { "wheell", "wheelr", "wheell", "wheelr", "deck", "trucks", "trucks" })
             {
-                Matrix transMat = Matrix.CreateTranslation(0, 0, 0);
+                Matrix transMat = Matrix.Identity;
+                Matrix rotMat = Matrix.Identity;
                 if (i == "wheell")
                 {
-                    transMat = Matrix.CreateRotationY((float)Math.PI) * Matrix.CreateTranslation(1f, 0, 0.3125f);
+                    rotMat = Matrix.CreateRotationY((float)Math.PI);
+                    transMat = Matrix.CreateTranslation(1f, 0, 0.3125f);
                     if (fDone)
-                        transMat = Matrix.CreateRotationY((float)Math.PI) * Matrix.CreateTranslation(-0.6f, 0, 0.3125f);                
+                        transMat = Matrix.CreateTranslation(-0.6f, 0, 0.3125f);                
                 }
                 if (i == "wheelr")
                 {
@@ -78,32 +80,32 @@ namespace minskatedev
                         transMat = Matrix.CreateTranslation(-0.6f, 0, 0);
                     fDoneT = true;
                 }
-                sk8Def[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\" + i, transMat);
+                sk8Def[x] = new ModelHelper(game, "models\\sk8\\" + i, transMat, Matrix.Identity, rotMat, Matrix.Identity);
                 x++;
             }
 
             x = 0;
             foreach (string i in new string[] { "black", "navyblue", "purpleish", "turq" })
             {
-                wheelsFL[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\wheels\\" + i + "l", Matrix.CreateRotationY((float)Math.PI) * Matrix.CreateTranslation(0.6f, 0, 0.3125f));
-                wheelsFR[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\wheels\\" + i + "r", Matrix.CreateTranslation(0.6f, 0, -0.3125f));
-                wheelsBL[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\wheels\\" + i + "l", Matrix.CreateRotationY((float)Math.PI) * Matrix.CreateTranslation(-0.6f, 0, 0.3125f));
-                wheelsBR[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\wheels\\" + i + "r", Matrix.CreateTranslation(-0.6f, 0, -0.3125f));
+                wheelsFL[x] = new ModelHelper(game, "models\\sk8\\wheels\\" + i + "l", Matrix.CreateTranslation(0.6f, 0, 0.3125f), Matrix.Identity, Matrix.CreateRotationY((float)Math.PI), Matrix.Identity);
+                wheelsFR[x] = new ModelHelper(game, "models\\sk8\\wheels\\" + i + "r", Matrix.CreateTranslation(0.6f, 0, -0.3125f), Matrix.Identity, Matrix.Identity, Matrix.Identity);
+                wheelsBL[x] = new ModelHelper(game, "models\\sk8\\wheels\\" + i + "l", Matrix.CreateTranslation(-0.6f, 0, 0.3125f), Matrix.Identity, Matrix.CreateRotationY((float)Math.PI), Matrix.Identity);
+                wheelsBR[x] = new ModelHelper(game, "models\\sk8\\wheels\\" + i + "r", Matrix.CreateTranslation(-0.6f, 0, -0.3125f), Matrix.Identity, Matrix.Identity, Matrix.Identity);
                 x++;
             }
 
             x = 0;
             foreach (string i in new string[] { "shake", "sk8" })
             {
-                decks[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\decks\\" + i, Matrix.CreateTranslation(0, 0, 0));
+                decks[x] = new ModelHelper(game, "models\\sk8\\decks\\" + i, Matrix.CreateTranslation(0, 0, 0), Matrix.Identity, Matrix.Identity, Matrix.Identity);
                 x++;
             }
 
             x = 0;
             foreach (string i in new string[] { "black", "navyblue", "purpleish", "turq", "white" })
             {
-                trucksF[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\trucks\\" + i, Matrix.CreateTranslation(0.6f, 0, 0));
-                trucksB[x] = new ModelHelper(game, worldMatrix, "models\\sk8\\trucks\\" + i, Matrix.CreateTranslation(-0.6f, 0, 0));
+                trucksF[x] = new ModelHelper(game, "models\\sk8\\trucks\\" + i, Matrix.CreateTranslation(0.6f, 0, 0), Matrix.Identity, Matrix.Identity, Matrix.Identity);
+                trucksB[x] = new ModelHelper(game, "models\\sk8\\trucks\\" + i, Matrix.CreateTranslation(-0.6f, 0, 0), Matrix.Identity, Matrix.Identity, Matrix.Identity);
                 x++;
             }
 
@@ -287,7 +289,7 @@ namespace minskatedev
                     {
                         effect.EnableDefaultLighting();
                         effect.View = viewMatrix;
-                        effect.World = model.worldMatrix;
+                        effect.World = model.rotationX * model.rotationY * model.rotationZ * model.translation;
                         effect.Projection = projectionMatrix;
                     }
 
