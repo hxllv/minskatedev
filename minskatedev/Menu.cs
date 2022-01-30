@@ -12,8 +12,9 @@ namespace minskatedev
 
         int mouseX, mouseY;
         bool mDown = false;
-        bool orbit = false;
-        bool rightOrbit = true;
+
+        public int menuState;
+        public int editState;
 
         Vector3 camTarget;
         Vector3 camPosition;
@@ -21,15 +22,17 @@ namespace minskatedev
         Matrix viewMatrix;
         Matrix worldMatrix;
 
-        ModelHelper[] sk8 = new ModelHelper[7];
-        ModelHelper[] sk8Def = new ModelHelper[7];
-        ModelHelper[] wheelsFL = new ModelHelper[4];
-        ModelHelper[] wheelsFR = new ModelHelper[4];
-        ModelHelper[] wheelsBL = new ModelHelper[4];
-        ModelHelper[] wheelsBR = new ModelHelper[4];
-        ModelHelper[] decks = new ModelHelper[4];
-        ModelHelper[] trucksF = new ModelHelper[5];
-        ModelHelper[] trucksB = new ModelHelper[5];
+        public ModelHelper[] sk8 = new ModelHelper[7];
+        public ModelHelper[] sk8Def = new ModelHelper[7];
+        public ModelHelper[] wheelsFL = new ModelHelper[4];
+        public ModelHelper[] wheelsFR = new ModelHelper[4];
+        public ModelHelper[] wheelsBL = new ModelHelper[4];
+        public ModelHelper[] wheelsBR = new ModelHelper[4];
+        public ModelHelper[] decks = new ModelHelper[4];
+        public ModelHelper[] trucksF = new ModelHelper[5];
+        public ModelHelper[] trucksB = new ModelHelper[5];
+
+        public int deckInd, truckInd, wheelInd;
 
         public Menu(Game game, GraphicsDeviceManager graphics,
             Vector3 camTarget, Vector3 camPosition, Matrix projectionMatrix, Matrix viewMatrix, Matrix worldMatrix)
@@ -41,13 +44,15 @@ namespace minskatedev
             this.projectionMatrix = projectionMatrix;
             this.viewMatrix = viewMatrix;
             this.worldMatrix = worldMatrix;
+            menuState = 0;
+            editState = 0;
         }
 
         public void MenuInit()
         {
             //Setup Camera
             camTarget = new Vector3(0f, 0f, 0f);
-            camPosition = new Vector3(0f, 2f, -4f);
+            camPosition = new Vector3(0f, 1f, -4f);
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45f), graphics.GraphicsDevice.Viewport.AspectRatio, 1f, 1000f);
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, new Vector3(0, 1f, 0f));
             worldMatrix = Matrix.CreateWorld(camTarget, Vector3.Forward, Vector3.Up);
@@ -62,7 +67,7 @@ namespace minskatedev
                 if (i == "wheell")
                 {
                     rotMat = Matrix.CreateRotationY((float)Math.PI);
-                    transMat = Matrix.CreateTranslation(1f, 0, 0.3125f);
+                    transMat = Matrix.CreateTranslation(0.6f, 0, 0.3125f);
                     if (fDone)
                         transMat = Matrix.CreateTranslation(-0.6f, 0, 0.3125f);                
                 }
@@ -109,143 +114,56 @@ namespace minskatedev
                 x++;
             }
 
-            //wheels
+            game.LoadSk8();
 
-            //front
-            sk8[0] = sk8Def[0];
-            sk8[1] = sk8Def[1];
-
-            //back
-            sk8[2] = sk8Def[2];
-            sk8[3] = sk8Def[3];
-
-            //deck
-            sk8[4] = sk8Def[4];
-
-            //trucks
-            sk8[5] = sk8Def[5];
-            sk8[6] = sk8Def[6];
-        }
-
-        public void MenuUpdate()
-        {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                Game.gameState = 1;
-                Game.mainGame.MainGameInit(sk8);
-            }
-
-            // horrible temp code
-
-            bool d = Keyboard.GetState().IsKeyDown(Keys.D);
-            bool t = Keyboard.GetState().IsKeyDown(Keys.T);
-            bool w = Keyboard.GetState().IsKeyDown(Keys.W);
-
-            // wheel selection
-
-            if (w && Keyboard.GetState().IsKeyDown(Keys.NumPad1))
-            {
-                sk8[0] = sk8Def[0];
-                sk8[1] = sk8Def[1];
-                sk8[2] = sk8Def[2];
-                sk8[3] = sk8Def[3];
-            }
-            if (w && Keyboard.GetState().IsKeyDown(Keys.NumPad2))
-            {
-                LoopWheels(0);
-            }
-            if (w && Keyboard.GetState().IsKeyDown(Keys.NumPad3))
-            {
-                LoopWheels(1);
-
-            }
-            if (w && Keyboard.GetState().IsKeyDown(Keys.NumPad4))
-            {
-                LoopWheels(2);
-
-            }
-            if (w && Keyboard.GetState().IsKeyDown(Keys.NumPad5))
-            {
-                LoopWheels(3);
-
-            }
-
-            // deck selection
-
-            if (d && Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+            if (deckInd == -1)
             {
                 sk8[4] = sk8Def[4];
             }
-            if (d && Keyboard.GetState().IsKeyDown(Keys.NumPad2))
+            else
             {
-                sk8[4] = decks[0];
-            }
-            if (d && Keyboard.GetState().IsKeyDown(Keys.NumPad3))
-            {
-                sk8[4] = decks[1];
+                sk8[4] = decks[deckInd];
             }
 
-            // trucks selection
-
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+            if (truckInd == -1)
             {
                 sk8[5] = sk8Def[5];
                 sk8[6] = sk8Def[6];
             }
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad2))
+            else
             {
-                LoopTrucks(0);
-            }
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad3))
-            {
-                LoopTrucks(1);
-
-            }
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad4))
-            {
-                LoopTrucks(2);
-
-            }
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad5))
-            {
-                LoopTrucks(3);
-
-            }
-            if (t && Keyboard.GetState().IsKeyDown(Keys.NumPad6))
-            {
-                LoopTrucks(4);
-
+                LoopTrucks(truckInd);
             }
 
+            if (wheelInd == -1)
+            {
+                //  front
+                sk8[0] = sk8Def[0];
+                sk8[1] = sk8Def[1];
+
+                //  back
+                sk8[2] = sk8Def[2];
+                sk8[3] = sk8Def[3];
+            }
+            else
+            {
+                LoopWheels(wheelInd);
+            }
+        }
+
+        public void MenuUpdate()
+        {
             //orbit
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                rightOrbit = false;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                rightOrbit = true;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                orbit = !orbit;
-            }
-
-            if (orbit)
+            if (menuState == 0)
             {
                 Matrix rotationMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(.5f));
-                if (!rightOrbit)
-                {
-                    rotationMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-.5f));
-                }
-
                 camPosition = Vector3.Transform(camPosition, rotationMatrix);
             }
 
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, Vector3.Up);
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && menuState != 0)
             {
                 if (!mDown)
                 {
@@ -263,18 +181,20 @@ namespace minskatedev
             }
         }
 
-        private void LoopWheels(int x)
+        public void LoopWheels(int x)
         {
             sk8[0] = wheelsFL[x];
             sk8[1] = wheelsFR[x];
             sk8[2] = wheelsBL[x];
             sk8[3] = wheelsBR[x];
+            wheelInd = x;
         }
 
-        private void LoopTrucks(int x)
+        public void LoopTrucks(int x)
         {
             sk8[5] = trucksF[x];
             sk8[6] = trucksB[x];
+            truckInd = x;
         }
 
         public void MenuDraw()
@@ -297,6 +217,38 @@ namespace minskatedev
                     mesh.Draw();
                 }
             }
+
+            if (menuState == 0 || editState == 0) return;
+
+            int height = 0;
+            int selector = 0;
+
+            switch(editState)
+            {
+                case 1:
+                    selector = wheelInd;
+                    break;
+                case 2:
+                    selector = truckInd;
+                    break;
+                case 3:
+                    selector = deckInd;
+                    break;
+            }
+
+            switch (selector)
+            {
+                case -1:
+                    height = 130;
+                    break;
+                default:
+                    height = selector * 60 + 190;
+                    break;
+            }
+
+            game.spriteBatch.Begin();
+            game.spriteBatch.DrawString(game.font, "O", new Vector2(10,  height), new Color(255, 97, 244), 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
+            game.spriteBatch.End();
         }
 
         public void MouseMove()

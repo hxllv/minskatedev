@@ -15,16 +15,19 @@ namespace minskatedev
             public ModelHelper wheelFR;
             public ModelHelper wheelBL;
             public ModelHelper wheelBR;
-            public BoundingBox deckBounds;
+            public BoundingSphere deckBoundsF;
+            public BoundingSphere deckBoundsB;
             public BoundingBox truckFBounds;
             public BoundingBox truckBBounds;
             public BoundingBox wheelFLBounds;
             public BoundingBox wheelFRBounds;
             public BoundingBox wheelBLBounds;
             public BoundingBox wheelBRBounds;
-            public Vector3 center;
+            Vector3 resetPoint;
+            Vector3 resetCamTar;
+            Vector3 resetCamPos;
+            float resetAngle;
             public float angle;
-            public bool isReversing;
             MainGame mainGame;
 
             Matrix identWFL = Matrix.CreateRotationY((float)Math.PI) * Matrix.CreateTranslation(0.6f, 0, 0.3125f);
@@ -57,13 +60,13 @@ namespace minskatedev
                 this.trucksF.translation = Matrix.CreateTranslation(0.6f, 1f, 0f);
                 this.trucksB.translation = Matrix.CreateTranslation(-0.6f, 1f, 0f);
 
-                this.deckBounds = UpdateBoundingBox(this.deck.model, this.deck.translation);
-                this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.translation);
-                this.truckBBounds = UpdateBoundingBox(this.trucksB.model, this.trucksB.translation);
-                this.wheelFLBounds = UpdateBoundingBox(this.wheelFL.model, this.wheelFL.translation);
-                this.wheelFRBounds = UpdateBoundingBox(this.wheelFR.model, this.wheelFR.translation);
-                this.wheelBLBounds = UpdateBoundingBox(this.wheelBL.model, this.wheelBL.translation);
-                this.wheelBRBounds = UpdateBoundingBox(this.wheelBR.model, this.wheelBR.translation);
+                UpdateBoundingBoxSk8();
+
+                this.angle = 0;
+                this.resetPoint = this.deck.translation.Translation;
+                this.resetAngle = this.angle;
+                this.resetCamTar = mainGame.camTarget;
+                this.resetCamPos = mainGame.camPosition;
 
                 this.mainGame = mainGame;
             }
@@ -89,13 +92,8 @@ namespace minskatedev
                 this.wheelBR.translation = wheelsBRMatrix * fwd;
                 this.trucksF.translation = trucksFMatrix * fwd;
                 this.trucksB.translation = trucksBMatrix * fwd;
-                this.deckBounds = UpdateBoundingBox(this.deck.model, this.deck.translation);
-                this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.translation);
-                this.truckBBounds = UpdateBoundingBox(this.trucksB.model, this.trucksB.translation);
-                this.wheelFLBounds = UpdateBoundingBox(this.wheelFL.model, this.wheelFL.translation);
-                this.wheelFRBounds = UpdateBoundingBox(this.wheelFR.model, this.wheelFR.translation);
-                this.wheelBLBounds = UpdateBoundingBox(this.wheelBL.model, this.wheelBL.translation);
-                this.wheelBRBounds = UpdateBoundingBox(this.wheelBR.model, this.wheelBR.translation);
+
+                UpdateBoundingBoxSk8();
 
                 camTarget.X = camTarget.X + cos;
                 camTarget.Z = camTarget.Z + sin;
@@ -124,13 +122,7 @@ namespace minskatedev
                 this.trucksF.translation = trucksFMatrix * vert;
                 this.trucksB.translation = trucksBMatrix * vert;
 
-                this.deckBounds = UpdateBoundingBox(this.deck.model, this.deck.translation);
-                this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.translation);
-                this.truckBBounds = UpdateBoundingBox(this.trucksB.model, this.trucksB.translation);
-                this.wheelFLBounds = UpdateBoundingBox(this.wheelFL.model, this.wheelFL.translation);
-                this.wheelFRBounds = UpdateBoundingBox(this.wheelFR.model, this.wheelFR.translation);
-                this.wheelBLBounds = UpdateBoundingBox(this.wheelBL.model, this.wheelBL.translation);
-                this.wheelBRBounds = UpdateBoundingBox(this.wheelBR.model, this.wheelBR.translation);
+                UpdateBoundingBoxSk8();
 
                 camTarget.Y = camTarget.Y + sk8VertVel;
                 camPosition.Y = camPosition.Y + sk8VertVel;
@@ -162,13 +154,7 @@ namespace minskatedev
                 this.trucksF.rotationY = identTF * lft * identTB * trucksFMatrix;
                 this.trucksB.rotationY = identTB * lft * identTF * trucksBMatrix;
 
-                this.deckBounds = UpdateBoundingBox(this.deck.model, this.deck.translation);
-                this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.translation);
-                this.truckBBounds = UpdateBoundingBox(this.trucksB.model, this.trucksB.translation);
-                this.wheelFLBounds = UpdateBoundingBox(this.wheelFL.model, this.wheelFL.translation);
-                this.wheelFRBounds = UpdateBoundingBox(this.wheelFR.model, this.wheelFR.translation);
-                this.wheelBLBounds = UpdateBoundingBox(this.wheelBL.model, this.wheelBL.translation);
-                this.wheelBRBounds = UpdateBoundingBox(this.wheelBR.model, this.wheelBR.translation);
+                UpdateBoundingBoxSk8();
 
                 camPosition = Vector3.Transform(camPosition - camTarget, lft) + camTarget;
 
@@ -228,46 +214,105 @@ namespace minskatedev
                 this.trucksB.rotationZ = identTB * rotMatrixZ * identTF * trucksBMatrixZ;
             }
 
+            public void SetResetPoint()
+            {
+                this.resetPoint = this.deck.translation.Translation;
+                this.resetAngle = this.angle;
+                this.resetCamTar = mainGame.camTarget;
+                this.resetCamPos = mainGame.camPosition;
+            }
+
             public void ResetSk8()
             {
-                this.wheelFL.translation = Matrix.CreateTranslation(0.6f, 1f, 0.3125f);
+                this.wheelFL.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, 0.3125f);
                 this.wheelFL.rotationX = Matrix.Identity;
                 this.wheelFL.rotationY = Matrix.CreateRotationY((float)Math.PI);
                 this.wheelFL.rotationZ = Matrix.Identity;
 
-                this.wheelFR.translation = Matrix.CreateTranslation(0.6f, 1f, -0.3125f);
+                this.wheelFR.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, -0.3125f);
                 this.wheelFR.rotationX = Matrix.Identity;
                 this.wheelFR.rotationY = Matrix.Identity;
                 this.wheelFR.rotationZ = Matrix.Identity;
 
-                this.wheelBL.translation = Matrix.CreateTranslation(-0.6f, 1f, 0.3125f);
+                this.wheelBL.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, 0.3125f);
                 this.wheelBL.rotationX = Matrix.Identity;
                 this.wheelBL.rotationY = Matrix.CreateRotationY((float)Math.PI);
                 this.wheelBL.rotationZ = Matrix.Identity;
 
-                this.wheelBR.translation = Matrix.CreateTranslation(-0.6f, 1f, -0.3125f);
+                this.wheelBR.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, -0.3125f);
                 this.wheelBR.rotationX = Matrix.Identity;
                 this.wheelBR.rotationY = Matrix.Identity;
                 this.wheelBR.rotationZ = Matrix.Identity;
 
-                this.deck.translation = Matrix.CreateTranslation(0f, 1f, 0f);
+                this.deck.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0f, 1f, 0f);
                 this.deck.rotationX = Matrix.Identity;
                 this.deck.rotationY = Matrix.Identity;
                 this.deck.rotationZ = Matrix.Identity;
 
-                this.trucksF.translation = Matrix.CreateTranslation(0.6f, 1f, 0f);
+                this.trucksF.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, 0f);
                 this.trucksF.rotationX = Matrix.Identity;
                 this.trucksF.rotationY = Matrix.Identity;
                 this.trucksF.rotationZ = Matrix.Identity;
 
-                this.trucksB.translation = Matrix.CreateTranslation(-0.6f, 1f, 0f);
+                this.trucksB.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, 0f);
                 this.trucksB.rotationX = Matrix.Identity;
                 this.trucksB.rotationY = Matrix.Identity;
                 this.trucksB.rotationZ = Matrix.Identity;
-                this.angle = 0;
 
-                mainGame.camTarget = new Vector3(0f, 0.8f, 0f);
-                mainGame.camPosition = new Vector3(-5f, 2.3f, 0f);
+                this.angle = this.resetAngle;
+                Input.Physics.speed = 0;
+
+                Rotate(0, this.angle, 0);
+
+                mainGame.camTarget = resetCamTar + new Vector3(0f, 1f, 0f);
+                mainGame.camPosition = resetCamPos + new Vector3(0f, 1f, 0f);
+                mainGame.viewMatrix = Matrix.CreateLookAt(mainGame.camPosition, mainGame.camTarget, new Vector3(0, 1f, 0f));
+            }
+
+            public void ResetSk8(Vector3 resetPoint, float resetAngle, Vector3 resetCamTar, Vector3 resetCamPos)
+            {
+                this.wheelFL.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, 0.3125f);
+                this.wheelFL.rotationX = Matrix.Identity;
+                this.wheelFL.rotationY = Matrix.CreateRotationY((float)Math.PI);
+                this.wheelFL.rotationZ = Matrix.Identity;
+
+                this.wheelFR.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, -0.3125f);
+                this.wheelFR.rotationX = Matrix.Identity;
+                this.wheelFR.rotationY = Matrix.Identity;
+                this.wheelFR.rotationZ = Matrix.Identity;
+
+                this.wheelBL.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, 0.3125f);
+                this.wheelBL.rotationX = Matrix.Identity;
+                this.wheelBL.rotationY = Matrix.CreateRotationY((float)Math.PI);
+                this.wheelBL.rotationZ = Matrix.Identity;
+
+                this.wheelBR.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, -0.3125f);
+                this.wheelBR.rotationX = Matrix.Identity;
+                this.wheelBR.rotationY = Matrix.Identity;
+                this.wheelBR.rotationZ = Matrix.Identity;
+
+                this.deck.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0f, 1f, 0f);
+                this.deck.rotationX = Matrix.Identity;
+                this.deck.rotationY = Matrix.Identity;
+                this.deck.rotationZ = Matrix.Identity;
+
+                this.trucksF.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(0.6f, 1f, 0f);
+                this.trucksF.rotationX = Matrix.Identity;
+                this.trucksF.rotationY = Matrix.Identity;
+                this.trucksF.rotationZ = Matrix.Identity;
+
+                this.trucksB.translation = Matrix.CreateTranslation(resetPoint) * Matrix.CreateTranslation(-0.6f, 1f, 0f);
+                this.trucksB.rotationX = Matrix.Identity;
+                this.trucksB.rotationY = Matrix.Identity;
+                this.trucksB.rotationZ = Matrix.Identity;
+
+                this.angle = resetAngle;
+                Input.Physics.speed = 0;
+
+                Rotate(0, this.angle, 0);
+
+                mainGame.camTarget = resetCamTar + new Vector3(0f, 1f, 0f);
+                mainGame.camPosition = resetCamPos + new Vector3(0f, 1f, 0f);
                 mainGame.viewMatrix = Matrix.CreateLookAt(mainGame.camPosition, mainGame.camTarget, new Vector3(0, 1f, 0f));
             }
 
@@ -303,6 +348,14 @@ namespace minskatedev
                 this.trucksB.rotationY = identTB * lft * identTF;
             }
 
+            void UpdateBoundingBoxSk8()
+            {
+                this.deckBoundsF = UpdateBoundingSphere(this.deck.translation.Translation, angle);
+                this.deckBoundsB = UpdateBoundingSphere(this.deck.translation.Translation, angle, false);
+                this.truckFBounds = UpdateBoundingBox(this.trucksF.model, this.trucksF.rotationY * this.trucksF.translation);
+                this.truckBBounds = UpdateBoundingBox(this.trucksB.model, this.trucksB.rotationY * this.trucksB.translation);
+            }
+
             public void SkateDraw(Matrix viewMatrix, Matrix projectionMatrix)
             {
                 foreach (ModelHelper model in new ModelHelper[] { deck, trucksF, trucksB, wheelFL, wheelFR, wheelBL, wheelBR })
@@ -323,6 +376,20 @@ namespace minskatedev
                         mesh.Draw();
                     }
                 }
+
+                //Matrix translateMatrix =
+                //    Matrix.CreateTranslation(deckBoundsF.Center);
+
+                //foreach (ModelMesh mesh in wheelBL.model.Meshes)
+                //{
+                //    foreach (BasicEffect effect in mesh.Effects)
+                //    {
+                //        effect.World = translateMatrix;
+                //        effect.View = viewMatrix;
+                //        effect.Projection = projectionMatrix;
+                //    }
+                //    mesh.Draw();
+                //}
             }
         }
     }

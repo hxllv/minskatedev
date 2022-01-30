@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
+using System;
 
 namespace minskatedev
 {
@@ -15,7 +17,7 @@ namespace minskatedev
                 public static List<Rail> rails;
                 public static List<Floor> floor;
                 private static decimal[] phys;
-                static int doingTrick = 0;
+                public static List<int> doingTricks = new List<int>();
                 public static bool fuckedTrick = false;
 
                 public static decimal[] UpdateInput()
@@ -23,28 +25,58 @@ namespace minskatedev
                     Animations.sk8 = sk8;
                     phys = Physics.UpdatePhysics(sk8, boxes, floor, rails);
 
+                    if (sk8.mainGame.gameOfSkating && !GameOfSkate.playerTurn)
+                    {
+                        Animations.Ollie.Animate();
+                        Animations.Flip.Animate();
+                        Animations.Shuv.Animate();
+
+                        if (phys[0] > 0 && phys[3] == 0)
+                            Sounds.PlayRoll();
+                        else
+                            Sounds.StopRoll();
+
+                        Sounds.RollVolume((float)phys[0]);
+
+                        return phys;
+                    }
+                        
+
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {
                         if (Physics.ExecJump())
-                            Animations.Ollie.KeyPress();
-
-                        if (doingTrick != 0)
                         {
-                            switch (doingTrick)
+                            Animations.Ollie.KeyPress();
+                            TrickNames.trickName = "";
+                        }
+
+                        if (doingTricks.Count != 0)
+                        {
+                            foreach (int doingTrick in doingTricks)
                             {
-                                case 1:
-                                    if (!Animations.Flip.StopTrick())
-                                        fuckedTrick = true;
-                                    break;
-                                case 2:
-                                    if (!Animations.Shuv.StopTrick())
-                                        fuckedTrick = true;
-                                    break;
+                                switch (doingTrick)
+                                {
+                                    case 1:
+                                        if (!Animations.Flip.StopTrick())
+                                            fuckedTrick = true;
+                                        break;
+                                    case 2:
+                                        if (!Animations.Shuv.StopTrick())
+                                            fuckedTrick = true;
+                                        break;
+                                }
                             }
 
-                            doingTrick = 0;
+                            doingTricks.Clear();
                         }
                     }
+
+                    if (phys[0] > 0 && phys[3] == 0)
+                        Sounds.PlayRoll();
+                    else 
+                        Sounds.StopRoll();
+
+                    Sounds.RollVolume((float)phys[0]);
 
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
                     {
@@ -72,7 +104,6 @@ namespace minskatedev
                     else
                     {
                         Physics.ExecDecreaseLeftTurn();
-
                     }
 
                     if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && phys[3] == 0)
@@ -89,31 +120,66 @@ namespace minskatedev
                         Physics.ExecStraightenTurn();
                     }
 
-                    if (doingTrick == 0)
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
                     {
-                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
-                        {
-                            Animations.Flip.KeyPress(0);
-                        }
-                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
-                        {
-                            Animations.Flip.KeyPress(1);
-                        }
-                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
-                        {
-                            Animations.Shuv.KeyPress(0);
-                        }
-                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
-                        {
-                            Animations.Shuv.KeyPress(1);
-                        }
+                        Animations.Flip.KeyPress(0);
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
+                    {
+                        Animations.Flip.KeyPress(1);
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+                    {
+                        Animations.Shuv.KeyPress(0);
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
+                    {
+                        Animations.Shuv.KeyPress(1);
                     }
 
                     Animations.Ollie.Animate();
                     Animations.Flip.Animate();
                     Animations.Shuv.Animate();
-
+                    
                     return phys;
+                }
+
+                public static class Sounds
+                {
+                    public static SoundEffect roll = null;
+                    public static SoundEffect pop = null;
+                    public static SoundEffect land = null;
+                    public static SoundEffectInstance rollInstance = null;
+
+                    public static void PlayRoll()
+                    {
+                        rollInstance.IsLooped = true;
+                        rollInstance.Play();
+                    }
+
+                    public static void StopRoll()
+                    {
+                        rollInstance.Stop();
+                    }
+
+                    public static void RollVolume(float x)
+                    {
+                        x = Math.Abs(x);
+                        if (x > 0.25f)
+                            x = 0.25f;
+
+                        rollInstance.Volume = x * 4;
+                    }
+
+                    public static void PlayPop()
+                    {
+                        pop.Play();
+                    }
+
+                    public static void PlayLand()
+                    {
+                        land.Play();
+                    }
                 }
             }
         }

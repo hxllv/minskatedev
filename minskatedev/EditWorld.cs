@@ -36,7 +36,7 @@ namespace minskatedev
                 selectedItem = 0;
             }
 
-            public static void UpdateEditWorld(MainGame mainGame, Microsoft.Xna.Framework.Game game)
+            public static void UpdateEditWorld(MainGame mainGame, Microsoft.Xna.Framework.Game game, Skate sk8)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
                 {
@@ -67,16 +67,25 @@ namespace minskatedev
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !firstPressEnter)
                 {
+                    float cos = (float)Math.Cos((double)sk8.angle) * offset;
+                    float sin = -(float)Math.Sin((double)sk8.angle) * offset;
+                    float x = sk8.deck.translation.M41;
+                    float z = sk8.deck.translation.M43;
+
+                    Matrix translation = toDraw.translation;
+                    if (selectedItem != 0)
+                        translation = Matrix.CreateTranslation(x, 0f, z) * Matrix.CreateTranslation(cos, 0, sin);
+
                     switch (selectedItem)
                     {
                         case 0:
-                            mainGame.floor.Add(new Floor(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
+                            mainGame.floor.Add(new Floor(game, translation, Matrix.Identity, rotation, Matrix.Identity));
                             break;
                         case 1:
-                            mainGame.boxes.Add(new Box(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
+                            mainGame.boxes.Add(new Box(game, translation, Matrix.Identity, rotation, Matrix.Identity));
                             break;
                         case 2:
-                            mainGame.rails.Add(new Rail(game, Matrix.CreateTranslation(0f, 0f, 0f), Matrix.Identity, rotation, Matrix.Identity));
+                            mainGame.rails.Add(new Rail(game, translation, Matrix.Identity, rotation, Matrix.Identity));
                             break;
                     }
 
