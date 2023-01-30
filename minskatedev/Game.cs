@@ -75,6 +75,11 @@ namespace minskatedev
 
         protected override void LoadContent()
         {
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.ApplyChanges();
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mainGame.spriteBatch = new SpriteBatch(GraphicsDevice);
             this.font = Content.Load<SpriteFont>("Default");
@@ -88,10 +93,10 @@ namespace minskatedev
             backToMenu2Button = new Button("backtomenu2", "Quit to Main Menu", 30, 120, 1);
             setResetButton = new Button("setreset", Content.Load<Texture2D>("imgs/menu/setreset"), 
                 Content.Load<Texture2D>("imgs/menu/setresethover"),
-                660, 10, 0.7f);
+                graphics.PreferredBackBufferWidth - 150, 10, 0.7f);
             resetButton = new Button("reset", Content.Load<Texture2D>("imgs/menu/reset"), 
                 Content.Load<Texture2D>("imgs/menu/resethover"),
-                660, (int)(setResetButton.text.Height * 0.7f + 30), 0.7f);
+                graphics.PreferredBackBufferWidth - 150, (int)(setResetButton.text.Height * 0.7f + 30), 0.7f);
             resetButton.buttonX += (int)(setResetButton.text.Width * 0.7f - resetButton.text.Width * 0.7f);
 
             playButton = new Button("play", "Play", 30, 60, 1);

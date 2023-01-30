@@ -22,7 +22,7 @@ namespace minskatedev
                 public static int catchIndex;
                 static int frameCounter = 0;
                 static string trickName = "";
-
+                static Random rnd = new Random();
                 static bool rollUp = true;
                 static bool trickExecdFlip = false;
                 static bool trickExecdShuv = false;
@@ -35,7 +35,6 @@ namespace minskatedev
                     trickExecdShuv = false;
                     trickExecdThreeShuv = false;
 
-                    Random rnd = new Random();
                     int chance = rnd.Next(0, 101);
                     catchIndex = 1;
 
