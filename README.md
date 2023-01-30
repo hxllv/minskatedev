@@ -1,7 +1,3 @@
-# Running
-
-Repo must be cloned to `C:\Users\admin\Documents\GitHub` in order for models and textures to work
-
 # Controls
 
 - `W` - Forward
